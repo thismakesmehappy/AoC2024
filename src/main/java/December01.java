@@ -1,4 +1,5 @@
 import helpers.Pair;
+import helpers.ProcessDataHelpers;
 import helpers.ReadFile;
 
 import java.util.ArrayList;
@@ -33,8 +34,7 @@ public class December01 {
         List<Integer> left = lists.getFirst();
         List<Integer> right = lists.getSecond();
         List<Integer> similarityScores =  new ArrayList<>();
-        for(int i = 0; i< left.size(); i++){
-            Integer value = left.get(i);
+        for (Integer value : left) {
             int countRepetitions = (int) right.stream().filter(x -> x.equals(value)).count();
             similarityScores.add(value * countRepetitions);
         }
@@ -52,20 +52,13 @@ public class December01 {
         return spaces;
     }
 
-    private Pair<Integer, Integer> splitLineIntoTwoNumbers(String line) {
-        String[] split = line.split("[ \\t\\n\\r\\f]+", 2);
-        Integer first = Integer.parseInt(split[0]);
-        Integer second = Integer.parseInt(split[1]);
-        return new Pair<>(first, second);
-    }
-
     private Pair<List<Integer>, List<Integer>> splitLinesIntoTwoLists(List<String> lines) {
         List<Integer> left = new ArrayList<>();
         List<Integer> right = new ArrayList<>();
         for (String line : lines) {
-            Pair<Integer, Integer> split = splitLineIntoTwoNumbers(line);
-            left.add(split.getFirst());
-            right.add(split.getSecond());
+            List<Integer> split = ProcessDataHelpers.splitLineIntoListOfNumbers(line);
+            left.add(split.get(0));
+            right.add(split.get(1));
         }
         return new Pair<>(left, right);
     }

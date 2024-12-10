@@ -31,8 +31,8 @@ public class December01 {
     }
 
     private List<Integer> getListOfOfSimilarityScores(Pair<List<Integer>, List<Integer>> lists) {
-        List<Integer> left = lists.getFirst();
-        List<Integer> right = lists.getSecond();
+        List<Integer> left = lists.first();
+        List<Integer> right = lists.second();
         List<Integer> similarityScores =  new ArrayList<>();
         for (Integer value : left) {
             int countRepetitions = (int) right.stream().filter(x -> x.equals(value)).count();
@@ -42,8 +42,8 @@ public class December01 {
     }
 
     private static List<Integer> getListOfOfSpaces(Pair<List<Integer>, List<Integer>> lists) {
-        List<Integer> left = lists.getFirst().stream().sorted().toList();
-        List<Integer> right = lists.getSecond().stream().sorted().toList();
+        List<Integer> left = lists.first().stream().sorted().toList();
+        List<Integer> right = lists.second().stream().sorted().toList();
         List<Integer> spaces =  new ArrayList<>();
         for(int i = 0; i< left.size(); i++){
             Integer space = Math.abs(left.get(i) - right.get(i));

@@ -38,7 +38,7 @@ public class December03 {
     private static Integer sumOfMultiplications(List<Pair<Integer, Integer>> multipliers) {
         return multipliers
                 .stream()
-                .map(multiples -> multiples.getFirst() * multiples.getSecond())
+                .map(multiples -> multiples.first() * multiples.second())
                 .reduce(0, Integer::sum);
     }
 
@@ -53,8 +53,8 @@ public class December03 {
     private String cleanup(String memory) {
         do {
             Pair<Integer, Integer> dontDoIndices = findLocationsToSnip(memory);
-            int indexDont = dontDoIndices.getFirst();
-            int indexDo = dontDoIndices.getSecond();
+            int indexDont = dontDoIndices.first();
+            int indexDo = dontDoIndices.second();
             if (indexDont == -1) {
                 break;
             }

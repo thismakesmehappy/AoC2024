@@ -1,7 +1,4 @@
-package december04;
-
-import helpers.Pair;
-import helpers.ReadFile;
+package helpers;
 
 import java.util.ArrayList;
 import java.util.HashSet;

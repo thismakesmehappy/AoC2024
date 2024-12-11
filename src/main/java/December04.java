@@ -1,4 +1,4 @@
-import december04.Crossword;
+import helpers.Crossword;
 
 public class December04 {
     private static final String WORD_TO_FIND = "XMAS";

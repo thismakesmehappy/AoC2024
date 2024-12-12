@@ -5,7 +5,7 @@ import helpers.SafetyManualUpdates;
 import java.util.*;
 import java.util.HashSet;
 
-import static helpers.Constants.BASE_INPUT_DIRECTORY;
+import static constants.Constants.BASE_INPUT_DIRECTORY;
 
 public class December05 {
     public static void main(String[] args) {

@@ -1,7 +1,4 @@
-import helpers.Pair;
 import org.junit.jupiter.api.Test;
-
-import static helpers.Constants.BASE_INPUT_DIRECTORY;
 
 public class December01Test {
     @Test

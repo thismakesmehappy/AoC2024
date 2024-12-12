@@ -5,29 +5,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static helpers.Constants.BASE_INPUT_DIRECTORY;
-import static helpers.CrosswordConstants.DIAGONALS;
-import static helpers.CrosswordConstants.DIRECTONS;
+import static constants.DiagonalDirections.DIAGONALS;
+import static constants.AllDirections.ALL_DIRECTIONS;
 
 public class Crossword {
-    private final List<String> grid;
-    private final int width;
-    private final int height;
+    private final Grid grid;
 
     public Crossword(String input) {
-        this.grid = importGrid(input);
-        this.width = grid.size();
-        this.height = grid.get(0).length();
+        this.grid = new Grid(input);
     }
 
     public String toString() {
-        return String.join("\n", this.grid);
+        return this.grid.toString();
     }
 
     public int findCountsOfWordInPuzzle(String wordToFind) {
         int totalCount = 0;
-        for (int y = 0; y < this.width; y ++) {
-            for (int x = 0; x < this.height; x ++) {
+        for (int y = 0; y < grid.getWidth(); y ++) {
+            for (int x = 0; x < grid.getHeight(); x ++) {
                 totalCount += getCountsOfWordFromPosition(wordToFind, x, y);
             }
         }
@@ -55,8 +50,8 @@ public class Crossword {
 
     private List<Pair<Integer, Integer>> findCentersForAllInstancesOfMas() {
         List<Pair<Integer, Integer>> xmasCenters = new ArrayList<>();
-        for (int y = 0; y < this.width; y ++) {
-            for (int x = 0; x < this.height; x ++) {
+        for (int y = 0; y < grid.getWidth(); y ++) {
+            for (int x = 0; x < grid.getHeight(); x ++) {
                 xmasCenters.addAll(getCentersOfXmasForPosition(x, y));
             }
         }
@@ -66,11 +61,11 @@ public class Crossword {
     private List<Pair<Integer, Integer>> getCentersOfXmasForPosition(int x, int y) {
         String word = "MAS";
         List<Pair<Integer, Integer>> centers = new ArrayList<>();
-        for (Pair<Integer, Integer> direction : DIAGONALS) {
-            boolean found = 1 == findWord(word, x, y, direction.first(), direction.second());
+        for (Coordinate direction : DIAGONALS) {
+            boolean found = 1 == findWord(word, x, y, direction.getX(), direction.getY());
             if (found) {
-                int centerX = x + direction.first();
-                int centerY = y + direction.second();
+                int centerX = x + direction.getX();
+                int centerY = y + direction.getY();
                 centers.add(new Pair<>(centerX, centerY));
             }
         }
@@ -79,8 +74,8 @@ public class Crossword {
 
     private int getCountsOfWordFromPosition(String wordToFind, int x, int y) {
         int count = 0;
-        for (Pair<Integer, Integer> direction : DIRECTONS) {
-            count += findWord(wordToFind, x, y, direction.first(), direction.second());
+        for (Coordinate direction : ALL_DIRECTIONS) {
+            count += findWord(wordToFind, x, y, direction.getX(), direction.getY());
             if (count > 0) {
             }
         }
@@ -104,14 +99,13 @@ public class Crossword {
     }
 
     private boolean isWrongLetter(int currentY, int currentX, char characterToFind) {
-        return grid.get(currentY).charAt(currentX) != characterToFind;
-    }
-
-    private List<String> importGrid(String input)  {
-        return ReadFile.readLines(BASE_INPUT_DIRECTORY, input);
+        return grid.get(currentX, currentY) != characterToFind;
     }
 
     private boolean isPositionOutOfBounds(int x, int y) {
-        return x < 0 || x >= width || y < 0 || y >= height;
+        return x < 0
+                || x >= grid.getWidth()
+                || y < 0
+                || y >= grid.getHeight();
     }
 }

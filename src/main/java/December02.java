@@ -3,7 +3,7 @@ import helpers.ReadFile;
 
 import java.util.List;
 
-import static helpers.Constants.BASE_INPUT_DIRECTORY;
+import static constants.Constants.BASE_INPUT_DIRECTORY;
 
 public class December02 {
     final static int MIN_INCREASE = 1;

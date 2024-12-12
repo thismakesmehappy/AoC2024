@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static helpers.Constants.BASE_INPUT_DIRECTORY;
+import static constants.Constants.BASE_INPUT_DIRECTORY;
 
 public class December03 {
     private static final Pattern PATTERN_MUL = Pattern.compile("mul\\((\\d{1,3}),(\\d{1,3})\\)");

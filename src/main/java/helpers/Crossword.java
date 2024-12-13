@@ -1,15 +1,17 @@
 package helpers;
 
+import constants.AllDirections;
+import constants.DiagonalDirections;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static constants.DiagonalDirections.DIAGONALS;
-import static constants.AllDirections.ALL_DIRECTIONS;
-
 public class Crossword {
     private final Grid grid;
+    private final List<Coordinate> DIAGONALS = new DiagonalDirections().COORDINATES();
+    private final List<Coordinate> ALL_DIRECTIONS = new AllDirections().COORDINATES();
 
     public Crossword(String input) {
         this.grid = new Grid(input);
@@ -88,7 +90,7 @@ public class Crossword {
         int currentY = y;
 
         for (int i = 0; i < wordSize; i++) {
-            if (isPositionOutOfBounds(currentX, currentY)
+            if (grid.isPositionOutOfBounds(currentX, currentY)
                     || isWrongLetter(currentY, currentX, wordToFind.charAt(i))) {
                 return 0;
             }
@@ -100,12 +102,5 @@ public class Crossword {
 
     private boolean isWrongLetter(int currentY, int currentX, char characterToFind) {
         return grid.get(currentX, currentY) != characterToFind;
-    }
-
-    private boolean isPositionOutOfBounds(int x, int y) {
-        return x < 0
-                || x >= grid.getWidth()
-                || y < 0
-                || y >= grid.getHeight();
     }
 }

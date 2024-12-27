@@ -23,6 +23,9 @@ public class Coordinate implements Comparable<Coordinate> {
     public Coordinate plus(Coordinate other) {
         return new Coordinate(this.x + other.x, this.y + other.y);
     }
+    public Coordinate minus(Coordinate other) {
+        return new Coordinate(this.x - other.x, this.y - other.y);
+    }
 
     public boolean equals(Object other) {
         if (other instanceof Coordinate) {
